@@ -1,6 +1,7 @@
 // main.js
-import { createApp } from 'vue';
+import { createApp, h } from 'vue';
 import * as VueRouter from 'vue-router';
+import App from './App.vue';
 import Login from './Login.vue';
 import Dashboard from './DashboardPage.vue';
 
@@ -15,6 +16,9 @@ const router = VueRouter.createRouter({
   routes
 });
 
-createApp()
-  .use(router)
-  .mount('#app');
+const app = createApp({
+  render: () => h(App)
+});
+
+app.use(router);
+app.mount("#app");
