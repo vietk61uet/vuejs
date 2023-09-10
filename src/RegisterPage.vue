@@ -41,6 +41,12 @@
     },
     methods: {
       registerEvent() {
+        if (this.username == '' || this.email == '' || this.password == '') {
+          console.log('Username or email or password must be filled');
+          this.registrationError = "Username or email or password must be filled";
+          return;
+        }
+
         this.registrationSuccess = true;
         this.registrationError = "";
   

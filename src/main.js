@@ -1,6 +1,7 @@
 // main.js
 import { createApp, h } from 'vue';
 import * as VueRouter from 'vue-router';
+import '@fortawesome/fontawesome-free/css/all.css';
 import App from './App.vue';
 import Login from './Login.vue';
 import Dashboard from './DashboardPage.vue';

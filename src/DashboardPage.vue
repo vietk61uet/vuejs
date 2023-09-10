@@ -12,7 +12,14 @@
           <img :src="product.image" :alt="product.title" class="product-image">
           <h2>{{ product.title }}</h2>
           <p>Price: {{ product.price }} USD</p>
-          <button v-show="product.hovered" @click="addToCart(product)" class="add-to-cart-button">Add to Cart</button>
+          <div class="button-container">
+            <button v-show="product.hovered" @click="addToCart(product)" class="add-to-cart-button">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+            <button v-show="product.hovered" @click="cancelFromCart(product)" class="cancel-from-cart-button">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
         </div>
       </div>
       </div>
@@ -72,6 +79,9 @@ export default {
     addToCart(product) {
       this.cartItems.push(product);
     },
+    cancelFromCart(product) {
+      this.cartItems.pop(product);
+    },
     setHovered(product, isHovered) {
       product.hovered = isHovered;
     },
@@ -84,7 +94,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* CSS cho các phần tử trong trang web */
 .shop {
   max-width: 800px;
@@ -119,17 +129,54 @@ header {
   margin-bottom: 10px;
 }
 
-.add-to-cart-button {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+.product:hover .add-to-cart-button .cancel-from-cart-button{
+  display: block;
+  background-color: #45a049;
 }
 
-.product:hover .add-to-cart-button {
-  display: block;
+.button-container {
+  display: relative;
+  align-items: center;
+}
+
+.add-to-cart-button{
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: #4CAF50;
+  color: black;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart-button i {
+  margin: 5px;
+}
+
+.cancel-from-cart-button{
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: #4CAF50;
+  color: black;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-from-cart-button i {
+  margin: 5px;
 }
 
 footer {
