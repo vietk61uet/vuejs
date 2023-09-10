@@ -1,19 +1,25 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <img alt="Vue logo" src="./assets/logo.png">
     <br>
-    <input v-model="login" placeholder="login" />
+    <div class="input-group">
+      <input v-model="login" placeholder="Login" class="input-field" />
+    </div>
     <br>
-    <input v-if="isPassword" v-model="password" type="password" placeholder="password"/>
-    <i
-      class="password-toggle"
-      :class="{'fas fa-eye': isPassword, 'fas fa-eye-slash': !isPassword}"
-      @click="togglePasswordVisibility"
-    ></i>
+    <div class="input-group">
+      <input v-if="isPassword" v-model="password" type="password" placeholder="Password" class="input-field"/>
+      <i
+        class="password-toggle"
+        :class="{'fas fa-eye': isPassword, 'fas fa-eye-slash': !isPassword}"
+        @click="togglePasswordVisibility"
+      ></i>
+    </div>
     <br>
     <br>
-    <button class="button" @click="signInEvent">sign in</button>
-    <button class="button" @click="signUpEvent">sign up</button>
+    <div class="button-group">
+      <button class="button" @click="signInEvent">Sign In</button>
+      <button class="button" @click="signUpEvent">Sign Up</button>
+    </div>
     <br>
   </div>
 </template>
@@ -31,7 +37,7 @@ export default {
   methods: {
     signInEvent() {
       if (this.login == '' || this.password == '') {
-        console.log('login and password cannot be empty');
+        console.log('Login and password cannot be empty');
         return;
       }
 
@@ -40,6 +46,7 @@ export default {
     },
     signUpEvent() {
       console.log('Sign Up clicked!');
+      this.$router.push('/register');
     },
     togglePasswordVisibility() {
       this.isPassword = !this.isPassword;
@@ -48,23 +55,44 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px; 
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Đảm bảo container chiếm đủ chiều cao của màn hình */
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.input-field {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  width: 300px;
 }
 
 .button {
-  margin-right: 10px;
-  padding: 10px 20px;
-  background-color: #15508e;
+  padding: 10px;
+  background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  flex: 1;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .password-toggle {
@@ -76,7 +104,7 @@ export default {
 }
 
 .password-toggle i {
-  display: none;
+  font-size: 14px;
 }
 
 .password-toggle i.fa-eye {
